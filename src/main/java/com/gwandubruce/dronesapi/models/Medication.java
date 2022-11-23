@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -20,4 +21,7 @@ public class Medication {
     private String weight;
     private String code;
     private String image;
+
+    @ManyToOne
+    private Drone drone;
 }
