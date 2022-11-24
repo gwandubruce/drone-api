@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -21,4 +22,6 @@ public class BatteryLevelEventLog {
     private Drone drone;
 
     private Integer batteryLevel;
+
+    private LocalDateTime timeOfLogEntry;
 }
