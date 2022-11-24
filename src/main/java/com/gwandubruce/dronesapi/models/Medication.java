@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class Medication {
 
     @Id
-    private Long id;
+    private String id;
 
     private String name;
     private String weight;
