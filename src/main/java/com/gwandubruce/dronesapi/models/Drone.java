@@ -16,7 +16,7 @@ import java.util.List;
 public class Drone {
 
     @Id
-    private Long id;
+    private String id;
 
     private String serialNumber;
     private Integer weightLimit;
