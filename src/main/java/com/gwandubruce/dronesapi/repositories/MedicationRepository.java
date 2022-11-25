@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface MedicationRepository extends CrudRepository<Medication , String> {
 
-    Optional<Medication> findByCode ();
+    Optional<Medication> findByCode (String code);
+    boolean deleteByCode(String code);
     List<Medication> findByDroneId(String droneId);
 }
