@@ -40,5 +40,10 @@ public class DroneController {
         return ResponseEntity.ok(response);
     }
 
-
+    @ResponseBody
+    @GetMapping(value = "/available-drones", produces = "application/json")
+    public ResponseEntity<List<String>> checkAvailableDrones() {
+        List<String> response = droneService.checkSerialNumbersOfDronesAvailable();
+        return ResponseEntity.ok(response);
+    }
 }
