@@ -17,7 +17,7 @@ public class MedicationDTO {
     private String id;
 
     private String name;
-    private String weight;
+    private Double weight;
     private String code;
     private String image;
 
