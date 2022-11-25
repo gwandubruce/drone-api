@@ -1,10 +1,7 @@
 package com.gwandubruce.dronesapi.services;
 
 import com.gwandubruce.dronesapi.enumerations.State;
-import com.gwandubruce.dronesapi.exceptions.BatteryLowException;
-import com.gwandubruce.dronesapi.exceptions.DroneNotFoundException;
-import com.gwandubruce.dronesapi.exceptions.MaximumWeightExceededException;
-import com.gwandubruce.dronesapi.exceptions.UnloadableException;
+import com.gwandubruce.dronesapi.exceptions.*;
 import com.gwandubruce.dronesapi.modelDTOs.MedicationDTO;
 import com.gwandubruce.dronesapi.models.Drone;
 import com.gwandubruce.dronesapi.models.Medication;
@@ -75,6 +72,31 @@ public class MedicationService {
         return drone.getBatteryCapacityPercent() < 25;
     }
 
+    public Medication addMedication (Medication medication) {
+        Optional<Medication> existingMedication = medicationRepository.findByCode(medication.getCode());
+       if(existingMedication.isPresent()) {
 
+           throw new DuplicateMedicationException();
+       }
+        Medication savedMedication = Medication.builder()
+                        .id(UUID.randomUUID().toString())
+                                .code(medication.getCode())
+                                        .drone(medication.getDrone())
+                                                .image(medication.getImage())
+                                                        .name(medication.getName())
+                                                                .weight(medication.getWeight())
+                                                                        .build();
+
+                return medicationRepository.save(savedMedication);
+    }
+
+    public Boolean deleteMedicationByCode (String code) {
+        Optional<Medication> existingMedication = medicationRepository.findByCode(code);
+       if(!existingMedication.isPresent()) {
+
+           throw new MedicationNotFoundException();
+       }
+      return medicationRepository.deleteByCode(code);
+    }
 
 }
