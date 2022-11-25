@@ -33,5 +33,12 @@ public class DroneController {
         return ResponseEntity.ok(medications);
     }
 
+    @ResponseBody
+    @GetMapping(value = "/check/battery/{serialNumber}", produces = "application/json")
+    public ResponseEntity<Double> checkBatteryLevelForADrone(@PathVariable("serialNumber") String serialNumber) {
+        Double response = droneService.checkBatteryLevelForADrone(serialNumber);
+        return ResponseEntity.ok(response);
+    }
+
 
 }
