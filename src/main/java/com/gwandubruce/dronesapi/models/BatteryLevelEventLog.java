@@ -23,7 +23,7 @@ public class BatteryLevelEventLog {
     @ManyToOne
     private Drone drone;
 
-    private Integer batteryLevel;
+    private Double batteryLevel;
 
     private LocalDateTime timeOfLogEntry;
 }
