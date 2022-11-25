@@ -20,7 +20,7 @@ public class Drone {
 
     private String serialNumber;
     private Integer weightLimit;
-    private Integer batteryCapacityPercent;
+    private Double batteryCapacityPercent;
 
     @Enumerated(EnumType.STRING)
     private Model droneModel;
