@@ -28,7 +28,7 @@ public class DroneController {
 
     @ResponseBody
     @GetMapping(value = "/check/medication/{serialNumber}", produces = "application/json")
-    public ResponseEntity<List<Medication>> checkMedications(@PathVariable String serialNumber) {
+    public ResponseEntity<List<Medication>> checkMedicationsOfADrone(@PathVariable("serialNumber") String serialNumber) {
         List<Medication> medications = droneService.checkMedicationsOfADrone(serialNumber);
         return ResponseEntity.ok(medications);
     }
