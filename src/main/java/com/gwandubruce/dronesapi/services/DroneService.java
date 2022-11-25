@@ -4,8 +4,10 @@ import com.gwandubruce.dronesapi.enumerations.Model;
 import com.gwandubruce.dronesapi.enumerations.State;
 import com.gwandubruce.dronesapi.exceptions.DroneAlreadyExistsException;
 import com.gwandubruce.dronesapi.exceptions.DroneModelDoesNotExist;
+import com.gwandubruce.dronesapi.exceptions.MedicationNotFoundException;
 import com.gwandubruce.dronesapi.modelDTOs.DroneDTO;
 import com.gwandubruce.dronesapi.models.Drone;
+import com.gwandubruce.dronesapi.models.Medication;
 import com.gwandubruce.dronesapi.repositories.DroneRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,6 +61,15 @@ public class DroneService {
               .map(Drone::getSerialNumber)
               .collect(Collectors.toList());
     }
+
+    public List<Medication> checkMedicationsOfADrone(String serialNumber) {
+        List<Medication> medications = droneRepository.findMedicationListBySerialNumber(serialNumber);
+        if (medications.size() == 0) {
+            throw new MedicationNotFoundException();
+        }
+        return medications;
+    }
+
 
     private boolean isWrongModel(DroneDTO drone){
         return !(drone.getDroneModel() instanceof Model);
