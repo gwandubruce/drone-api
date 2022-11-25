@@ -18,7 +18,7 @@ public class DroneDTO {
 
     private String serialNumber;
     private Integer weightLimit;
-    private Integer batteryCapacityPercent;
+    private Double batteryCapacityPercent;
 
 
     private Model droneModel;
