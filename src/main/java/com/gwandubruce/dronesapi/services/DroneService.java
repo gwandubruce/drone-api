@@ -70,6 +70,15 @@ public class DroneService {
         return medications;
     }
 
+    public Double checkBatteryLevelForADrone(String serialNumber) {
+        Double batteryCapacityPercent = droneRepository.findBatteryCapacityPercentBySerialNumber(serialNumber);
+        if (batteryCapacityPercent == null) {
+            throw new IllegalArgumentException("Your serial Number could be wrong,Kindly re-check");
+        }
+
+        return batteryCapacityPercent;
+    }
+
 
     private boolean isWrongModel(DroneDTO drone){
         return !(drone.getDroneModel() instanceof Model);
