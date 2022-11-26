@@ -5,7 +5,7 @@ import com.gwandubruce.dronesapi.models.Drone;
 import com.gwandubruce.dronesapi.repositories.BatteryLevelEventLogRepository;
 import com.gwandubruce.dronesapi.repositories.DroneRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +13,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class BatteryLevelEventLogService {
 
     private final BatteryLevelEventLogRepository batteryLevelEventLogRepository;
     private final DroneRepository droneRepository;
 
-    @Scheduled(fixedRate = 60_000)
+    @Scheduled(fixedRate = 3 , timeUnit = TimeUnit.MINUTES)
     public void monitorBatteryLevel() {
+
+        log.info("Drone battery level audit log started");
 
         List<BatteryLevelEventLog> batteryLevelEventLog = new ArrayList<>();
         Iterable<Drone> drones = droneRepository.findAll();
@@ -36,6 +40,15 @@ public class BatteryLevelEventLogService {
                         .drone(drone)
                         .build()));
 
-        batteryLevelEventLogRepository.saveAll(batteryLevelEventLog);
+        batteryLevelEventLog.stream()
+                .filter(a -> a.getDrone() != null)
+                .forEach(
+                        lg -> log.info("The battery level of Drone with serial number ("
+                                + lg.getDrone().getSerialNumber() + ") is "
+                                + lg.getBatteryLevel() + "% charged"
+                        ));
+        log.info("Drone battery level audit log ended");
+
+        //    batteryLevelEventLogRepository.saveAll(batteryLevelEventLog);
     }
 }
