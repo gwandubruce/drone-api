@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class DroneService {
 
     private static final int DRONE_MAX_WEIGHT_LIMIT = 500;
-    private static final int DRONE_MIN_BATTERY_LIMIT = 25;
+    private static final Double DRONE_MIN_BATTERY_LIMIT = 25.0;
 
     private static final List<State> LOADABLE_STATES = Arrays.asList(State.IDLE,State.LOADING);
 
@@ -52,7 +52,7 @@ public class DroneService {
 
     public List<String> checkSerialNumbersOfDronesAvailable() {
 
-        List<Drone> drones = droneRepository.findByWeightLessThanAndBatteryGreaterThanAndStateIn(
+        List<Drone> drones = droneRepository.findByWeightLimitLessThanAndBatteryCapacityPercentGreaterThanAndStateIn(
                 DRONE_MAX_WEIGHT_LIMIT,
                 DRONE_MIN_BATTERY_LIMIT,
                 LOADABLE_STATES);
