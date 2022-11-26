@@ -1,6 +1,6 @@
 package com.gwandubruce.dronesapi.exceptions;
 
-public class UnloadableException extends Exception{
+public class UnloadableException extends RuntimeException{
 
     public UnloadableException(){
 

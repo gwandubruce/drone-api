@@ -1,6 +1,6 @@
 package com.gwandubruce.dronesapi.exceptions;
 
-public class MaximumWeightExceededException extends Exception{
+public class MaximumWeightExceededException extends RuntimeException{
 
     public MaximumWeightExceededException(){
 
