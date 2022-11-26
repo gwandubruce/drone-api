@@ -8,12 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Stack;
 
 public interface DroneRepository extends CrudRepository<Drone , String> {
 
     Optional<Drone> findBySerialNumber(String serialNumber);
-    List<Drone> findByWeightLessThanAndBatteryGreaterThanAndStateIn(int weight, int batteryPercent, List<State> state);
+    List<Drone> findByWeightLimitLessThanAndBatteryCapacityPercentGreaterThanAndStateIn(Integer weight, Double batteryPercent, List<State> state);
 
     @Query("select d.batteryCapacityPercent from Drone d where d.serialNumber = ?1")
     Double findBatteryCapacityPercentBySerialNumber(String serialNumber);
