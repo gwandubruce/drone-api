@@ -21,11 +21,11 @@ public class MedicationService {
     private final MedicationRepository medicationRepository;
     private final DroneRepository droneRepository;
 
-    public Medication loadMedicationIntoDrone (MedicationDTO medicationDTO , String droneId) throws MaximumWeightExceededException, DroneNotFoundException, UnloadableException, BatteryLowException {
+    public Medication loadMedicationIntoDrone (MedicationDTO medicationDTO ) throws MaximumWeightExceededException, DroneNotFoundException, UnloadableException, BatteryLowException {
 
-        checkDroneLoadability(droneId,medicationDTO);
+        checkDroneLoadability(medicationDTO);
 
-        Drone drone = droneRepository.findById(droneId).orElseThrow(()-> new DroneNotFoundException());
+        Drone drone = droneRepository.findById(medicationDTO.getDrone().getId()).orElseThrow(()-> new DroneNotFoundException());
 
         Medication medication = Medication.builder()
                 .id(UUID.randomUUID().toString())
@@ -41,8 +41,11 @@ public class MedicationService {
 
         return medicationRepository.save(medication);
     }
-    private void checkDroneLoadability (String droneId, MedicationDTO medicationDTO) throws DroneNotFoundException, UnloadableException, BatteryLowException, MaximumWeightExceededException {
-
+    private void checkDroneLoadability (MedicationDTO medicationDTO) throws DroneNotFoundException, UnloadableException, BatteryLowException, MaximumWeightExceededException {
+        if (medicationDTO == null || medicationDTO.getDrone() == null) {
+            return;
+        }
+        String droneId = medicationDTO.getDrone().getId();
         Optional<Drone> droneOptional = droneRepository.findById(droneId);
         Drone drone = droneOptional.orElseThrow(()->new DroneNotFoundException());
 
@@ -72,7 +75,7 @@ public class MedicationService {
         return drone.getBatteryCapacityPercent() < 25;
     }
 
-    public Medication addMedication (Medication medication) {
+    public Medication addMedication (MedicationDTO medication) {
         Optional<Medication> existingMedication = medicationRepository.findByCode(medication.getCode());
        if(existingMedication.isPresent()) {
 
