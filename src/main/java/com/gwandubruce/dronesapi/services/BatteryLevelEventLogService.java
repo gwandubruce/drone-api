@@ -45,7 +45,7 @@ public class BatteryLevelEventLogService {
                 .forEach(
                         lg -> log.info("The battery level of Drone with serial number ("
                                 + lg.getDrone().getSerialNumber() + ") is "
-                                + lg.getBatteryLevel() + "% charged"
+                                + lg.getBatteryLevel() + "% charged as @ "+ LocalDateTime.now()
                         ));
         log.info("Drone battery level audit log ended");
 
