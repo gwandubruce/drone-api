@@ -33,7 +33,7 @@ public class MedicationController{
   }
 
   @ResponseBody
-  @DeleteMapping(value = "delete/{code}")
+  @RequestMapping(value = "delete/{code}")
   public ResponseEntity<Boolean> delete(@PathVariable("code") String code) {
     Boolean response = medicationService.deleteMedicationByCode(code);
     return ResponseEntity.ok(response);
