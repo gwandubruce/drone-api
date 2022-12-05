@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface DroneRepository extends CrudRepository<Drone , String> {
 
     Optional<Drone> findBySerialNumber(String serialNumber);
-    List<Drone> findByWeightLimitLessThanAndBatteryCapacityPercentGreaterThanAndStateIn(Integer weight, Double batteryPercent, List<State> state);
+    List<Drone> findByWeightLimitLessThanEqualAndBatteryCapacityPercentGreaterThanEqualAndStateIn(Integer weight, Double batteryPercent, List<State> state);
 
     @Query("select d.batteryCapacityPercent from Drone d where d.serialNumber = ?1")
     Double findBatteryCapacityPercentBySerialNumber(String serialNumber);
