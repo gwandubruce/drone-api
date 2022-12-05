@@ -81,6 +81,6 @@ public class DroneService {
 
 
     private boolean isWrongModel(DroneDTO drone){
-        return !(drone.getDroneModel() instanceof Model);
+        return drone.getDroneModel().equals(Model.INVALID);
     }
 }
