@@ -37,10 +37,10 @@ public class InitialData {
             }
 
             if(i%2 == 0) {
-                medicationRepository.save(new Medication(id+i,"Metformin",50.0,"CCFBYH","metformin.png",drone));
+                medicationRepository.save(new Medication(id+i,"Metformin",50.0,"CCFBYH".replace('H',(char)('H'+i++)),"metformin.png",drone));
             } else {
 
-                medicationRepository.save(new Medication(id+i,"Metoprolol",90.0,"DCFBSH","metoprolol.png",drone1));
+                medicationRepository.save(new Medication(id+i,"Metoprolol",90.0,"DCFBSH".replace('H',(char)('I'+i++)),"metoprolol.png",drone1));
             }
         }
     }
