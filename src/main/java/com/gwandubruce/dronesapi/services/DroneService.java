@@ -52,13 +52,14 @@ public class DroneService {
 
     public List<String> checkSerialNumbersOfDronesAvailable() {
 
-        List<Drone> drones = droneRepository.findByWeightLimitLessThanAndBatteryCapacityPercentGreaterThanAndStateIn(
+        List<Drone> drones = droneRepository.findByWeightLimitLessThanEqualAndBatteryCapacityPercentGreaterThanEqualAndStateIn(
                 DRONE_MAX_WEIGHT_LIMIT,
                 DRONE_MIN_BATTERY_LIMIT,
                 LOADABLE_STATES);
 
       return   drones.stream()
               .map(Drone::getSerialNumber)
+              .distinct()
               .collect(Collectors.toList());
     }
 
