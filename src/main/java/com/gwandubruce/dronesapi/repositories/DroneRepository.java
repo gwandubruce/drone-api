@@ -5,10 +5,11 @@ import com.gwandubruce.dronesapi.models.Drone;
 import com.gwandubruce.dronesapi.models.Medication;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Repository
 public interface DroneRepository extends CrudRepository<Drone , String> {
 
     Optional<Drone> findBySerialNumber(String serialNumber);
