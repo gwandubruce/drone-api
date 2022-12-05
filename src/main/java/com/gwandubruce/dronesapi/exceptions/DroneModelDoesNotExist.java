@@ -1,6 +1,6 @@
 package com.gwandubruce.dronesapi.exceptions;
 
-public class DroneModelDoesNotExist extends RuntimeException {
+public class DroneModelDoesNotExist extends IllegalArgumentException {
     public DroneModelDoesNotExist(String message) {
         super(message);
     }
