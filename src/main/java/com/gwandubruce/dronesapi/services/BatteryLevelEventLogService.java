@@ -23,7 +23,7 @@ public class BatteryLevelEventLogService {
     private final BatteryLevelEventLogRepository batteryLevelEventLogRepository;
     private final DroneRepository droneRepository;
 
-    @Scheduled(fixedRate = 3 , timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)
     public void monitorBatteryLevel() {
 
         log.info("Drone battery level audit log started");
@@ -45,10 +45,9 @@ public class BatteryLevelEventLogService {
                 .forEach(
                         lg -> log.info("The battery level of Drone with serial number ("
                                 + lg.getDrone().getSerialNumber() + ") is "
-                                + lg.getBatteryLevel() + "% charged as @ "+ LocalDateTime.now()
+                                + lg.getBatteryLevel() + "% charged as @ " + LocalDateTime.now()
                         ));
         log.info("Drone battery level audit log ended");
 
-        //    batteryLevelEventLogRepository.saveAll(batteryLevelEventLog);
     }
 }
