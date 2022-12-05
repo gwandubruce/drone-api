@@ -3,6 +3,7 @@ package com.gwandubruce.dronesapi.models;
 import com.gwandubruce.dronesapi.enumerations.Model;
 import com.gwandubruce.dronesapi.enumerations.State;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Drone {
 
     @Id
