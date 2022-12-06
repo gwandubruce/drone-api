@@ -1,16 +1,11 @@
 package com.gwandubruce.dronesapi.modelDTOs;
 
 import com.gwandubruce.dronesapi.models.Drone;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Value
+@Data
+@Builder
 public class MedicationDTO {
 
 
