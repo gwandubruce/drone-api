@@ -8,6 +8,7 @@ import com.gwandubruce.dronesapi.models.Medication;
 import com.gwandubruce.dronesapi.repositories.DroneRepository;
 import com.gwandubruce.dronesapi.repositories.MedicationRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class MedicationService {
+    @Autowired
+    private MedicationRepository medicationRepository;
 
-    private final MedicationRepository medicationRepository;
-    private final DroneRepository droneRepository;
+    @Autowired
+    private DroneRepository droneRepository;
 
     public Medication loadMedicationIntoDrone (MedicationDTO medicationDTO ) throws MaximumWeightExceededException, DroneNotFoundException, UnloadableException, BatteryLowException {
 
